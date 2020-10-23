@@ -6,7 +6,7 @@ docker-compose
 
 # Usage
 ``` bash
-$ git clone git@github.com:H0R15H0/react-app.git frontend
+$ git clone git@github.com:gettan1023/frontend.git frontend
 $ cd frontend
 $ echo "PORT=3010" > .env
 $ docker-compose up --build
