@@ -1,28 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Top from "containers/Top";
+import PublicRoom from "containers/PublicRoom";
+import PrivateRoom from "containers/PrivateRoom";
+
 import './App.css';
 
 function App() {
   return (
     <>
     <CssBaseline />
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <Router>
+          <div>
+            <Route exact path='/' component={Top} />
+            <Route path='/public_room' component={PublicRoom} />
+            <Route path='/private_room' component={PrivateRoom} />
+          </div>
+        </Router>
+      </div>
     </>
   );
 }
