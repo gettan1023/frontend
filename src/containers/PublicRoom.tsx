@@ -1,5 +1,6 @@
 import React from "react";
 import {} from "@material-ui/core";
+import { useParams, useHistory, useLocation} from "react-router-dom";
 import { styled } from "@material-ui/core/styles";
 import ImageMessage from "components/atoms/ImageMessage";
 import TextMessage from "components/atoms/TextMessage";
