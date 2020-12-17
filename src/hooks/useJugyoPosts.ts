@@ -13,7 +13,6 @@ interface Jugyo{
 
 export function useJugyoPosts(){
     const [ d, error ] = useGetDataApi(`/api/v1/jugyos`);
-    console.log(d);
     const data: Jugyo = d?.jugyos?.map((v:any) => ({
         id: v.id,
         name: v.name,

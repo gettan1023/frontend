@@ -1,26 +1,53 @@
 import React from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { Typography, Button, Select, Card } from "@material-ui/core";
-import Header from "components/molecules/Header";
-import RoomMake from "components/molecules/RoomMake";
 import { styled } from "@material-ui/core/styles";
-import { useUser } from "hooks/useUser";
+import ActionCable from "actioncable";
 import ChatWindow from "components/molecules/ChatWindow";
+import SideBar from "components/molecules/SideBar";
 const StyledHello = styled(Typography)({
   // これはテスト用
   color: "red",
 });
 
+interface ChatChannel extends ActionCable.Channel {
+  speak(message: String): void;
+}
+
 const Top: React.FC = () => {
-  const userUuid: string = JSON.stringify(localStorage.getItem("userUuid"));
+  const userUuid: string = localStorage.getItem("userUuid") as string;
   const location = useLocation().search;
   const roomUuid: string = location?.split("=")[1];
+  const cable = ActionCable.createConsumer(
+    `ws://localhost:3000/cable?p=${userUuid}`
+  );
+  console.log(`ws://localhost:3000/cable?p=${userUuid}`);
+  const chatChannel = cable.subscriptions.create(
+    { channel: "RoomChannel", room_uuid: roomUuid },
+    {
+      connected() {
+        console.log("connected");
+      },
+      received(data: any) {
+        // とりあえずconsole.logで確認
+        console.log(data);
+      },
+      speak(message: string) {
+        console.log(message);
+        return this.perform("send_message", { message: message });
+      },
+    }
+  ) as ChatChannel;
+  const postMessage = (sendMessage: string) => {
+    chatChannel.speak(sendMessage);
+  };
+  
+  console.log(userUuid);
+  console.log(roomUuid)
   return (
     <>
-      <Header />
-      <RoomMake />
       <StyledHello>Hello World</StyledHello>
-      <ChatWindow userUuid={userUuid} roomUuid={roomUuid}/>
+      <ChatWindow postMessage={postMessage} roomUuid={roomUuid}/>
     </>
   );
 };

@@ -51,7 +51,7 @@ export function usePostDataApi(
       });
   };
   useEffect(() => {
-    console.log(hostname + url);
+    // console.log(hostname + url);
     if (!lazy && defaultParams) loadFn(defaultParams);
   }, [url]);
   return [response, error, loadFn];

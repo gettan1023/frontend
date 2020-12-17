@@ -8,7 +8,6 @@ interface Universities {
 
 export function useUniversities(){
     const [ d, error ] = useGetDataApi(`/api/v1/universities`);
-    console.log(d?.universities);
     const data: Universities = d?.universities?.map((v: any) => ({
         id: v?.id,
         name: v?.name,

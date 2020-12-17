@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePostDataApi } from "hooks/useApi";
 
 interface User{
@@ -8,20 +8,20 @@ interface User{
 }
 
 export function useUser(params: any){
-    const userUuid = !!localStorage.getItem("userUuid") ? JSON.parse(localStorage.getItem("userUuid") as string) : null;
-    console.log(userUuid)
-    params = userUuid ? null : params;
-    let data = "";
-    console.log("called");
-    const [d, error] = usePostDataApi(`/api/v1/users`, params);
-    console.log(d);
-    if(userUuid){
-      data = userUuid;
-    }else{
-      data = d?.user?.uuid;
-      localStorage.setItem("userUuid", JSON.stringify(data));
-      console.log(data);
-    }
-    
+    const [data, setData] = useState<string | null>(null);
+    let userUuid = localStorage.getItem("userUuid");
+    if (userUuid !== "undefined" && userUuid !== undefined && userUuid !== null ) {
+      params = null;
+    } 
+    const [ d ] = usePostDataApi(`/api/v1/users`, params);
+    useEffect(() => {
+      if (userUuid !== "undefined" && userUuid !== undefined  && userUuid !== null) {
+        setData(userUuid);
+      } else {
+        const uu = d?.user?.uuid;
+        setData(uu);
+        localStorage.setItem("userUuid", uu as string);
+      }
+    }, [params]);
     return data;
 }
