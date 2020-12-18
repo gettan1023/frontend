@@ -13,5 +13,5 @@ export function useRoom(uuid: string){
         message: v.message,
         userUuid: v.userUuid
     }));
-    return [data, loading];
+    return data;
 }

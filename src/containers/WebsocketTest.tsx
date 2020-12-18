@@ -26,36 +26,37 @@ const WebsocketTest: React.FC = () => {
   const userUuid: string = localStorage.getItem("userUuid") as string;
   const location = useLocation().search;
   const roomUuid: string = location?.split("=")[1];
-  const [msg, loading] = useRoom(roomUuid);
   const [messages, setMessages] = useState<Messages[]>([]);
-  const [re, setRe] = useState<boolean>(false);
+  const [channel, setChannel] = useState<ChatChannel | null>(null);
   console.log("called");
-  useEffect(() => {
-      setMessages(msg);
-  },[loading]);
   console.log(messages);
   const cable = ActionCable.createConsumer(
     `ws://localhost:3000/cable?p=${userUuid}`
   );
-  const chatChannel: ChatChannel = useMemo(() => 
-    cable.subscriptions.create(
-      { channel: "RoomChannel", room_uuid: roomUuid },
-      {
-        connected() {
-          console.log("connected");
-        },
-        received(data: Messages) {
-          // とりあえずconsole.logで確認
-          console.log(data);
-          console.log(messages);
-          setRe(true);
-        },
-        speak(message: string) {
-          return this.perform("send_message", { message: message });
-        }
-      }) as ChatChannel, [roomUuid]);
+  useEffect(() => {
+    const chatChannel: ChatChannel = cable.subscriptions.create(
+        { channel: "RoomChannel", room_uuid: roomUuid },
+        {
+          connected() {
+            console.log("connected");
+          },
+          disconnected(){
+
+          },
+          received(data: Messages) {
+            // とりあえずconsole.logで確認
+            console.log(data);
+            console.log(messages);
+            setMessages([...messages, data]);
+          },
+          speak(message: string) {
+            return this.perform("send_message", { message: message });
+          }
+        }) as ChatChannel;
+    setChannel(chatChannel);
+    },[]);
   const postMessage = (sendMessage: string) => {
-    chatChannel?.speak(sendMessage);
+    channel?.speak(sendMessage);
   };
 
   return (
