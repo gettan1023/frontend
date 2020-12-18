@@ -27,12 +27,13 @@ const WebsocketTest: React.FC = () => {
   const location = useLocation().search;
   const roomUuid: string = location?.split("=")[1];
   const [msg, loading] = useRoom(roomUuid);
-  const [messages, setMessages] = useState<Messages[]>(msg);
-  const preMessage = useMemo(() => msg, [msg]);
+  const [messages, setMessages] = useState<Messages[]>([]);
+  const [re, setRe] = useState<boolean>(false);
   console.log("called");
   useEffect(() => {
-      setMessages(preMessage);
+      setMessages(msg);
   },[loading]);
+  console.log(messages);
   const cable = ActionCable.createConsumer(
     `ws://localhost:3000/cable?p=${userUuid}`
   );
@@ -47,14 +48,12 @@ const WebsocketTest: React.FC = () => {
           // とりあえずconsole.logで確認
           console.log(data);
           console.log(messages);
-          const prevMsg = messages;
-          setMessages([...prevMsg, data])
+          setRe(true);
         },
         speak(message: string) {
           return this.perform("send_message", { message: message });
         }
       }) as ChatChannel, [roomUuid]);
-
   const postMessage = (sendMessage: string) => {
     chatChannel?.speak(sendMessage);
   };

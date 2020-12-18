@@ -8,6 +8,7 @@ interface Messages{
 
 export function useRoom(uuid: string){
     const [d, error, loading] = useGetDataApi(`/api/v1/rooms/${uuid}`);
+    console.log(d)
     const data: Messages[] = d?.room?.userRoomMessages?.map((v: any) => ({
         message: v.message,
         userUuid: v.userUuid
