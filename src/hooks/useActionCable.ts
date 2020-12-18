@@ -18,6 +18,7 @@ export function useActionCable(userUuid: string, roomUuid: string){
          received(data: any) {
            // とりあえずconsole.logで確認
            console.log(data);
+           return data;
          },
          speak(message: string) {
            console.log(message);
@@ -25,6 +26,9 @@ export function useActionCable(userUuid: string, roomUuid: string){
          },
        }
      ) as ChatChannel;
+    
+    const send = chatChannel.speak;
+
 
      return [ chatChannel.speak ]
 }

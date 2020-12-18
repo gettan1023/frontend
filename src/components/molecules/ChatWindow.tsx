@@ -6,26 +6,17 @@ import TextMessage from "components/atoms/TextMessage";
 
 interface Props{
     postMessage: (m: string) => void;
-    roomUuid: string;
+    presentMessage: any;
 };
 
 
-const ChatWindow: React.FC<Props> = ({postMessage, roomUuid}) => {
-    const [messages, setMessages] = useState<string[]>([]);
+const ChatWindow: React.FC<Props> = ({postMessage, presentMessage}) => {
     const [textValue, changeTextValue] = useState<string>("");
-    const [msg, error] = useRoom(roomUuid);
-    useEffect(() => {
-        setMessages(msg);
-    }, []);
-    const  updateMessage = (receivedMessage: string) => {
-        setMessages([...messages, receivedMessage]);
-        console.log(messages);
-    };
     return (
       <>
         <p>こんにちは</p>
-        {messages?.map((v: any) => (
-          <p>{v}</p>
+        {presentMessage?.map((v: any, i:any) => (
+          <p key={i}>{v.message}</p>
         ))}
         <div>
           <TextField
