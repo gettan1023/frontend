@@ -1,3 +1,4 @@
+<<<
 import React, {useState, useEffect} from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import {Typography, Button, Select, InputLabel, FormGroup, Grid, SvgIcon, Card, CardContent} from "@material-ui/core";
@@ -50,6 +51,10 @@ const BoldText = styled(Typography)`
 const JugyoWrapper = styled(Grid)`
   margin: 30px 0;
 `;
+
+const StyledText = styled(Typography)({
+    color: "red"
+});
 
 const Top: React.FC = () => {
     const [university] = useUniversities();
