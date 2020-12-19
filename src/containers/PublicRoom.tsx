@@ -10,6 +10,8 @@ import SideBar from "components/molecules/SideBar";
 const PublicRoom: React.FC = () => {
     return(
         <>
+            <SideBar></SideBar>
+            <InputField></InputField>
         </>
     );   
 };

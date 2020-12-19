@@ -7,6 +7,7 @@ const Wrapper = styled(Box)`
   margin-left: auto;
   margin-right: auto;
   padding: 0;
+  margin-bottom: 30px;
   @media screen and (max-width: 1072px) {
     max-width: 800px;
   }

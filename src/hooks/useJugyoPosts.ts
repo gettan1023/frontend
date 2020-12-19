@@ -12,7 +12,7 @@ interface Jugyo{
 }
 
 export function useJugyoPosts(){
-    const [ d, error ] = useGetDataApi(`/api/v1/jugyos`);
+    const [ d, error, loading ] = useGetDataApi(`/api/v1/jugyos`);
     const data: Jugyo = d?.jugyos?.map((v:any) => ({
         id: v.id,
         name: v.name,
@@ -24,5 +24,5 @@ export function useJugyoPosts(){
         isMainRoom: v.rooms[0].isMainRoom
     }));
 
-    return [ data, error ];
+    return [ data, loading ];
 };

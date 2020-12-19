@@ -19,6 +19,7 @@ export function useGetDataApi(
     axios
       .get(hostname + url, { params })
       .then((res: AxiosResponse<any>) => {
+        console.log(res);
         setResponse(camelcaseKeys(res.data, { deep: true }));
         setLoading(false);
 
