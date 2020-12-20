@@ -3,7 +3,10 @@ import { Typography, Button, Grid } from "@material-ui/core";
 import styled from 'styled-components';
 
 const Logo = styled(Typography)`
-
+  font-weight: bold;
+  padding-left: 20px;
+  padding-top: 20px;
+  color: #38448B;
 `;
 
 
@@ -16,7 +19,7 @@ const Logo = styled(Typography)`
       justify="space-between"
       alignItems="center"
     >
-        <Typography>GETTAN</Typography>
+        <Logo variant="h4">GETTAN</Logo>
         <Button>部屋を作成する</Button>
       </Grid>
     </>

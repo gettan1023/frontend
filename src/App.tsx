@@ -5,20 +5,23 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Top from "containers/Top";
 import PublicRoom from "containers/PublicRoom";
 import PrivateRoom from "containers/PrivateRoom";
+import WebsocketTest from "containers/WebsocketTest";
 
 import './App.css';
+
 
 function App() {
   return (
     <>
-    <CssBaseline />
+      <CssBaseline />
       <div className="App">
         <Router>
-          <div>
-            <Route exact path='/' component={Top} />
-            <Route path='/public_room' component={PublicRoom} />
-            <Route path='/private_room' component={PrivateRoom} />
-          </div>
+              <div>
+                <Route exact path="/" component={Top} />
+                <Route path="/public_room" component={PublicRoom} />
+                <Route path="/private_room" component={PrivateRoom} />
+                <Route path="/test" component={WebsocketTest} />
+              </div>
         </Router>
       </div>
     </>

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { styled } from "@material-ui/core/styles";
 import ImageMessage from "components/atoms/ImageMessage";
 import TextMessage from "components/atoms/TextMessage";
 import InputField from "components/molecules/InputField";
@@ -48,24 +48,11 @@ const styles: {[key: string]: React.CSSProperties} = {
 
 const PublicRoom: React.FC = () => {
     return(
-      <div style={styles.body}>
-      <div style={styles.leftside}>
-      <Typography style={styles.title}>GETTAN</Typography>
-      <Typography style={styles.li}>大学名</Typography>
-      <Typography style={styles.li}>授業名</Typography>
-      <Typography style={styles.li}>曜日・時限</Typography>
-      <Typography style={styles.li}>教授名</Typography>
-      <div style={styles.footer}>
-      <Button style={styles.btn}>
-
-      </Button>
-      <Button style={styles.btn}>
-      <Typography >退出</Typography>
-      </Button>
-      </div>
-      </div>
-      </div>
-    );
+        <>
+            <SideBar></SideBar>
+            <InputField></InputField>
+        </>
+    );   
 };
 
 export default PublicRoom;

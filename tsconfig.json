@@ -28,7 +28,8 @@
     "strictNullChecks": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "downlevelIteration": true,
   },
   "include": [
     "src"
