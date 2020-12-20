@@ -1,4 +1,3 @@
-<<<
 import React, {useState, useEffect} from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import {Typography, Button, Select, InputLabel, FormGroup, Grid, SvgIcon, Card, CardContent} from "@material-ui/core";

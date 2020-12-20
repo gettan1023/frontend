@@ -4,7 +4,6 @@ import ImageMessage from "components/atoms/ImageMessage";
 import TextMessage from "components/atoms/TextMessage";
 import InputField from "components/molecules/InputField";
 import SideBar from "components/molecules/SideBar";
-import styled from 'styled-components';
 import {Typography, Button, Select, Card} from "@material-ui/core";
 
 const styles: {[key: string]: React.CSSProperties} = {
